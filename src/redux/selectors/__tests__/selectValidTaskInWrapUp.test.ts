@@ -1,11 +1,10 @@
 import selectValidTaskInWrapUp from '../selectValidTaskInWrapUp';
-import { STAGING_GENERAL_SUPPORT } from '../../../constants/ValidTaskQueues';
 
 describe('selectValidTaskInWrapUp', () => {
   describe('when there is a matching task', () => {
     const task = {
       taskChannelUniqueName: 'voice',
-      queueSid: STAGING_GENERAL_SUPPORT,
+      queueSid: 'WQ123',
       dateUpdated: Date.now().valueOf() - 100000000,
       taskStatus: 'wrapping',
       conference: {
@@ -22,6 +21,12 @@ describe('selectValidTaskInWrapUp', () => {
         worker: {
           tasks: new Map([['WT123', task]]),
         },
+        config: {
+          pluginForceTaskCompletion: {
+            taskQueues: ['WQ123'],
+            taskChannels: ['voice'],
+          },
+        },
       },
     };
 
@@ -35,7 +40,7 @@ describe('selectValidTaskInWrapUp', () => {
   describe('when there is not a matching task', () => {
     const task = {
       taskChannelUniqueName: 'chat',
-      queueSid: 'WS123',
+      queueSid: 'WQ123',
       dateUpdated: Date.now(),
       taskStatus: 'assigned',
     };
@@ -43,6 +48,12 @@ describe('selectValidTaskInWrapUp', () => {
       flex: {
         worker: {
           tasks: new Map([['WT123', task]]),
+        },
+        config: {
+          pluginForceTaskCompletion: {
+            taskQueues: ['WQ123'],
+            taskChannels: ['voice'],
+          },
         },
       },
     };

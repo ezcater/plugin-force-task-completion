@@ -17,4 +17,8 @@ var appConfig = {
   ytica: false,
   logLevel: 'debug',
   showSupervisorDesktopView: true,
+  pluginForceTaskCompletion: {
+    taskChannels: ['voice', 'outbound-voice'],
+    taskQueues: ['WQ123'],
+  },
 };

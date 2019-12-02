@@ -1,5 +1,4 @@
 import configureStore from 'redux-mock-store';
-import { STAGING_GENERAL_SUPPORT } from './../../../constants/ValidTaskQueues';
 import { ACTION_START_TASK_COMPLETION_TIMER } from './../../../constants/ActionTypes';
 import startTaskCompleteTimer from '../startTaskCompleteTimer';
 import {
@@ -10,7 +9,7 @@ import tracker from './../../../utilities/tracker';
 
 const task = {
   taskChannelUniqueName: 'voice',
-  queueSid: STAGING_GENERAL_SUPPORT,
+  queueSid: 'WQ123',
   dateUpdated: Date.now().valueOf() - 100000000,
   taskStatus: 'wrapping',
   conference: {
@@ -29,6 +28,12 @@ const store = configuredStore({
   flex: {
     worker: {
       tasks: new Map([['WT123', task]]),
+    },
+    config: {
+      pluginForceTaskCompletion: {
+        taskQueues: ['WQ123'],
+        taskChannels: ['voice'],
+      },
     },
   },
   forceTaskCompletion: {

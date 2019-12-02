@@ -62,7 +62,7 @@ Dispatched when the limit to show the notification has been reached. The timeout
 
 Dispatched when the reservation is completed
 
-## Constants
+## Configuration
 
 ### Durations
 
@@ -83,10 +83,22 @@ This can be overriden in localStorage using the key `PluginForceTaskCompletion:C
 The duration of time before the task is re-shown after the agent clicks "Snooze" on the task completion notification.
 This can be overriden in localStorage using the key `PluginForceTaskCompletion:SNOOZE_DURATION_IN_MINUTES`.
 
-### ValidTaskChannels
+### Channels and queues
 
-The task channels for which the task completion notification will appear for. If the corresponding task channel is not listed in this array then the task will never be forced into completion.
+Define what channels and queues you'd like to show the notification in within your `appConfig`.
 
-### ValidTaskQueues
-
-The task queues sids for which the task completion notification will appear for. If the corresponding task queue sid is not listed in this array then the task will never be forced into completion.
+```js
+{
+  ...
+  pluginForceTaskCompletion: {
+    // The task channels for which the task completion notification will appear
+    // for. If the corresponding task channel is not listed in this array then
+    // the task will never be forced into completion.
+    taskChannels: ['voice', 'outbound-voice'],
+    // The task queues sids for which the task completion notification will appear
+    // for. If the corresponding task queue sid is not listed in this array then
+    // the task will never be forced into completion.
+    taskQueues: ['WQ123'],
+  },
+}
+```
