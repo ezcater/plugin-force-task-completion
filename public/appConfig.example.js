@@ -12,7 +12,7 @@ var appConfig = {
     url: pluginServiceUrl,
   },
   sso: {
-    accountSid: accountSid
+    accountSid: accountSid,
   },
   ytica: false,
   logLevel: 'debug',

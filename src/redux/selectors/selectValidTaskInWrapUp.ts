@@ -1,17 +1,17 @@
 import { ITask } from '@twilio/flex-ui';
 import { AppState } from 'redux/reducers/rootReducer';
 import { NOTIFICATION_LIMIT_IN_MILLISECONDS } from 'constants/Durations';
-import ValidTaskChannels from 'constants/ValidTaskChannels';
-import ValidTaskQueues from 'constants/ValidTaskQueues';
 
 const selectValidTaskInWrapUp = (state: AppState): ITask | undefined => {
   const tasks = Array.from(state.flex.worker.tasks.values());
+  const config = state.flex.config as any;
+  const { taskChannels, taskQueues } = config.pluginForceTaskCompletion;
 
   return tasks.find(task => {
-    const isValidTaskChannel = ValidTaskChannels.includes(
+    const isValidTaskChannel = taskChannels.includes(
       task.taskChannelUniqueName
     );
-    const isValidTaskQueue = ValidTaskQueues.includes(task.queueSid);
+    const isValidTaskQueue = taskQueues.includes(task.queueSid);
     const timeSinceCreation = Date.now().valueOf() - task.dateUpdated.valueOf();
     const isWrapUpTimeOverLimit =
       task.taskStatus === 'wrapping' &&
