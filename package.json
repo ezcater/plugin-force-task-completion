@@ -1,0 +1,56 @@
+{
+  "name": "plugin-force-task-completion",
+  "description": "Automatically complete Flex tasks after a set duration.",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "bootstrap": "flex-plugin check-start",
+    "prebuild": "rm -rf build && npm run bootstrap",
+    "build": "flex-plugin build",
+    "clear": "flex-plugin clear",
+    "predeploy": "npm run build",
+    "deploy": "flex-plugin deploy",
+    "eject": "flex-plugin eject",
+    "info": "flex-plugin info",
+    "postinstall": "npm run bootstrap",
+    "list": "flex-plugin list",
+    "remove": "flex-plugin remove",
+    "prestart": "npm run bootstrap",
+    "start": "flex-plugin start",
+    "test": "flex-plugin test --env=jsdom"
+  },
+  "dependencies": {
+    "@ezcater/feature-flags-js": "^3.2.0",
+    "craco-config-flex-plugin": "^3.0.6",
+    "flex-plugin": "^3.0.0",
+    "flex-plugin-scripts": "^3.2.0",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
+    "react-scripts": "3.2.0",
+    "typescript": "^3.6.4"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^9.3.2",
+    "@twilio/flex-ui": "^1",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.12",
+    "@types/react": "^16.8.16",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-redux": "^7.1.1",
+    "@types/redux-mock-store": "^1.0.1",
+    "babel-polyfill": "^6.26.0",
+    "redux-mock-store": "^1.5.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
