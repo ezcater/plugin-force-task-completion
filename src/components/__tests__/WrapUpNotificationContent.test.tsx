@@ -1,6 +1,6 @@
 import React from 'react';
-import {Provider} from 'react-redux';
-import {render} from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { render } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import WrapUpNotificationContent from '../WrapUpNotificationContent';
 import {
@@ -20,14 +20,15 @@ describe('<WrapUpNotificationContent />', () => {
     });
 
     it('displays the correct initial message', () => {
-      const {getByText} = render(
+      const { getByText } = render(
         <Provider store={store}>
           <WrapUpNotificationContent />
         </Provider>
       );
 
       const secondsUntilWrapUp = COMPLETION_LIMIT_IN_MILLISECONDS / 1000;
-      const totalWrapUpTimeLimit = NOTIFICATION_LIMIT_IN_MINUTES + COMPLETION_LIMIT_IN_MINUTES;
+      const totalWrapUpTimeLimit =
+        NOTIFICATION_LIMIT_IN_MINUTES + COMPLETION_LIMIT_IN_MINUTES;
       const message = `You've been in wrap up for almost ${totalWrapUpTimeLimit} minutes. This task will auto-complete in ${secondsUntilWrapUp} seconds. If you need additional time before the task completes, click "Snooze" to keep the task open for 5 more minutes.`;
 
       const messageElement = getByText(message);
@@ -36,7 +37,7 @@ describe('<WrapUpNotificationContent />', () => {
     });
 
     it('displays the correct message after time has elapsed', () => {
-      const {getByText} = render(
+      const { getByText } = render(
         <Provider store={store}>
           <WrapUpNotificationContent />
         </Provider>
@@ -45,7 +46,8 @@ describe('<WrapUpNotificationContent />', () => {
       jest.advanceTimersByTime(1000);
 
       const secondsUntilWrapUp = COMPLETION_LIMIT_IN_MILLISECONDS / 1000 - 1;
-      const totalWrapUpTimeLimit = NOTIFICATION_LIMIT_IN_MINUTES + COMPLETION_LIMIT_IN_MINUTES;
+      const totalWrapUpTimeLimit =
+        NOTIFICATION_LIMIT_IN_MINUTES + COMPLETION_LIMIT_IN_MINUTES;
       const message = `You've been in wrap up for almost ${totalWrapUpTimeLimit} minutes. This task will auto-complete in ${secondsUntilWrapUp} seconds. If you need additional time before the task completes, click "Snooze" to keep the task open for 5 more minutes.`;
 
       const messageElement = getByText(message);
@@ -62,7 +64,7 @@ describe('<WrapUpNotificationContent />', () => {
     });
 
     it('displays the correct initial message', () => {
-      const {getByText} = render(
+      const { getByText } = render(
         <Provider store={store}>
           <WrapUpNotificationContent />
         </Provider>
@@ -77,7 +79,7 @@ describe('<WrapUpNotificationContent />', () => {
     });
 
     it('displays the correct message after time has elapsed', () => {
-      const {getByText} = render(
+      const { getByText } = render(
         <Provider store={store}>
           <WrapUpNotificationContent />
         </Provider>

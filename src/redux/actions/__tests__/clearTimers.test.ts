@@ -1,6 +1,6 @@
 import configureStore from 'redux-mock-store';
-import {TASK_PENDING_COMPLETION_NOTIFICATION_ID} from './../../../constants/NotificationId';
-import {ACTION_CLEAR_TIMERS} from '../../../constants/ActionTypes';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../../constants/NotificationId';
+import { ACTION_CLEAR_TIMERS } from '../../../constants/ActionTypes';
 import clearTimers from '../clearTimers';
 import tracker from './../../../utilities/tracker';
 
@@ -17,7 +17,7 @@ global.clearTimeout = jest.fn();
 global.Twilio = {
   Flex: {
     Manager: {
-      getInstance: () => ({store}),
+      getInstance: () => ({ store }),
     },
     Notifications: {
       dismissNotificationById: jest.fn(),
@@ -53,16 +53,19 @@ describe('clearTimers', () => {
   it('dismisses the correct notification', () => {
     clearTimers();
 
-    expect(window.Twilio.Flex.Notifications.dismissNotificationById).toHaveBeenCalledWith(
-      TASK_PENDING_COMPLETION_NOTIFICATION_ID
-    );
+    expect(
+      window.Twilio.Flex.Notifications.dismissNotificationById
+    ).toHaveBeenCalledWith(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
   });
 
   it('calls the event tracking utility', () => {
     clearTimers();
 
-    expect(tracker.track).toHaveBeenCalledWith('force task completion activity', {
-      action: 'forced completion canceled',
-    });
+    expect(tracker.track).toHaveBeenCalledWith(
+      'force task completion activity',
+      {
+        action: 'forced completion canceled',
+      }
+    );
   });
 });

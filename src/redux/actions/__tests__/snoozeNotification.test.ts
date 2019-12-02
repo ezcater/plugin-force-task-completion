@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
-import {ACTION_SNOOZE_NOTIFICATION_TIMER} from './../../../constants/ActionTypes';
+import { ACTION_SNOOZE_NOTIFICATION_TIMER } from './../../../constants/ActionTypes';
 import snoozeNotification from '../snoozeNotification';
-import {TASK_PENDING_COMPLETION_NOTIFICATION_ID} from './../../../constants/NotificationId';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../../constants/NotificationId';
 import tracker from './../../../utilities/tracker';
 import * as selectValidTaskInWrapUp from '../../selectors/selectValidTaskInWrapUp';
 
@@ -18,7 +18,7 @@ global.clearTimeout = jest.fn();
 global.Twilio = {
   Flex: {
     Manager: {
-      getInstance: () => ({store}),
+      getInstance: () => ({ store }),
     },
     Notifications: {
       dismissNotificationById: jest.fn(),
@@ -55,16 +55,18 @@ describe('snoozeNotification', () => {
     it('dismisses the correct notification', () => {
       snoozeNotification();
 
-      expect(window.Twilio.Flex.Notifications.dismissNotificationById).toHaveBeenCalledWith(
-        TASK_PENDING_COMPLETION_NOTIFICATION_ID
-      );
+      expect(
+        window.Twilio.Flex.Notifications.dismissNotificationById
+      ).toHaveBeenCalledWith(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
     });
   });
 
   describe('when the timeout created by the action is called', () => {
     describe('and the task is in a valid state', () => {
       beforeEach(() => {
-        jest.spyOn(selectValidTaskInWrapUp, 'default').mockReturnValue({} as any);
+        jest
+          .spyOn(selectValidTaskInWrapUp, 'default')
+          .mockReturnValue({} as any);
       });
 
       it('shows the correct notification', () => {
@@ -72,15 +74,17 @@ describe('snoozeNotification', () => {
 
         jest.runOnlyPendingTimers();
 
-        expect(window.Twilio.Flex.Notifications.showNotification).toHaveBeenCalledWith(
-          TASK_PENDING_COMPLETION_NOTIFICATION_ID
-        );
+        expect(
+          window.Twilio.Flex.Notifications.showNotification
+        ).toHaveBeenCalledWith(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
       });
     });
 
     describe('and the task is not in a valid state', () => {
       beforeEach(() => {
-        jest.spyOn(selectValidTaskInWrapUp, 'default').mockReturnValue(undefined);
+        jest
+          .spyOn(selectValidTaskInWrapUp, 'default')
+          .mockReturnValue(undefined);
       });
 
       it('sets a new timeout', () => {
@@ -96,7 +100,9 @@ describe('snoozeNotification', () => {
 
         jest.runOnlyPendingTimers();
 
-        expect(window.Twilio.Flex.Notifications.showNotification).not.toHaveBeenCalled();
+        expect(
+          window.Twilio.Flex.Notifications.showNotification
+        ).not.toHaveBeenCalled();
       });
 
       it('calls the tracking utility', () => {
@@ -104,9 +110,12 @@ describe('snoozeNotification', () => {
 
         jest.runOnlyPendingTimers();
 
-        expect(tracker.track).toHaveBeenCalledWith('force task completion activity', {
-          action: 'notification snoozed due to active call',
-        });
+        expect(tracker.track).toHaveBeenCalledWith(
+          'force task completion activity',
+          {
+            action: 'notification snoozed due to active call',
+          }
+        );
       });
     });
   });

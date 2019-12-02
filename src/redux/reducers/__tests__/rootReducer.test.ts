@@ -26,7 +26,7 @@ describe('rootReducer', () => {
         completeTaskTimeoutId: 100,
         notificationTimeoutId: 200,
       },
-      {type: ACTION_CLEAR_TIMERS}
+      { type: ACTION_CLEAR_TIMERS }
     );
 
     expect(state).toEqual({
@@ -39,7 +39,7 @@ describe('rootReducer', () => {
   it(`should handle ${ACTION_START_NOTIFICATION_TIMER}`, () => {
     const state = rootReducer(initialState, {
       type: ACTION_START_NOTIFICATION_TIMER,
-      payload: {notificationTimeoutId: 201},
+      payload: { notificationTimeoutId: 201 },
     });
 
     expect(state).toEqual({
@@ -52,7 +52,7 @@ describe('rootReducer', () => {
   it(`should handle ${ACTION_START_TASK_COMPLETION_TIMER}`, () => {
     const state = rootReducer(initialState, {
       type: ACTION_START_TASK_COMPLETION_TIMER,
-      payload: {completeTaskTimeoutId: 101},
+      payload: { completeTaskTimeoutId: 101 },
     });
 
     expect(state).toEqual({
@@ -65,7 +65,7 @@ describe('rootReducer', () => {
   it(`should handle ${ACTION_SNOOZE_NOTIFICATION_TIMER}`, () => {
     const state = rootReducer(initialState, {
       type: ACTION_SNOOZE_NOTIFICATION_TIMER,
-      payload: {notificationTimeoutId: 201},
+      payload: { notificationTimeoutId: 201 },
     });
 
     expect(state).toEqual({

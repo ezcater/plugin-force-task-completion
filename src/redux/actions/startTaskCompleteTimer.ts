@@ -1,8 +1,8 @@
-import {AppState} from 'redux/reducers/rootReducer';
-import {TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID} from 'constants/NotificationId';
-import {ACTION_START_TASK_COMPLETION_TIMER} from 'constants/ActionTypes';
-import {COMPLETION_LIMIT_IN_MILLISECONDS} from 'constants/Durations';
-import {TASK_PENDING_COMPLETION_NOTIFICATION_ID} from 'constants/NotificationId';
+import { AppState } from 'redux/reducers/rootReducer';
+import { TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID } from 'constants/NotificationId';
+import { ACTION_START_TASK_COMPLETION_TIMER } from 'constants/ActionTypes';
+import { COMPLETION_LIMIT_IN_MILLISECONDS } from 'constants/Durations';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
 import tracker from 'utilities/tracker';
 import selectValidTaskInWrapUp from 'redux/selectors/selectValidTaskInWrapUp';
 

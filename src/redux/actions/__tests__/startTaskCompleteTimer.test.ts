@@ -1,6 +1,6 @@
 import configureStore from 'redux-mock-store';
-import {STAGING_GENERAL_SUPPORT} from './../../../constants/ValidTaskQueues';
-import {ACTION_START_TASK_COMPLETION_TIMER} from './../../../constants/ActionTypes';
+import { STAGING_GENERAL_SUPPORT } from './../../../constants/ValidTaskQueues';
+import { ACTION_START_TASK_COMPLETION_TIMER } from './../../../constants/ActionTypes';
 import startTaskCompleteTimer from '../startTaskCompleteTimer';
 import {
   TASK_PENDING_COMPLETION_NOTIFICATION_ID,
@@ -41,7 +41,7 @@ global.clearTimeout = jest.fn();
 global.Twilio = {
   Flex: {
     Manager: {
-      getInstance: () => ({store}),
+      getInstance: () => ({ store }),
     },
     Notifications: {
       dismissNotificationById: jest.fn(),
@@ -96,9 +96,12 @@ describe('startTaskCompleteTimer', () => {
 
       await flushPromises();
 
-      expect(tracker.track).toHaveBeenCalledWith('force task completion activity', {
-        action: 'task completed',
-      });
+      expect(tracker.track).toHaveBeenCalledWith(
+        'force task completion activity',
+        {
+          action: 'task completed',
+        }
+      );
     });
 
     it('dismisses the correct notification', async () => {
@@ -108,9 +111,9 @@ describe('startTaskCompleteTimer', () => {
 
       await flushPromises();
 
-      expect(window.Twilio.Flex.Notifications.dismissNotificationById).toHaveBeenCalledWith(
-        TASK_PENDING_COMPLETION_NOTIFICATION_ID
-      );
+      expect(
+        window.Twilio.Flex.Notifications.dismissNotificationById
+      ).toHaveBeenCalledWith(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
     });
 
     it('shows the correct notification', async () => {
@@ -120,9 +123,9 @@ describe('startTaskCompleteTimer', () => {
 
       await flushPromises();
 
-      expect(window.Twilio.Flex.Notifications.showNotification).toHaveBeenCalledWith(
-        TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID
-      );
+      expect(
+        window.Twilio.Flex.Notifications.showNotification
+      ).toHaveBeenCalledWith(TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID);
     });
   });
 });

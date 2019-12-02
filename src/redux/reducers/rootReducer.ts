@@ -1,9 +1,9 @@
-import {StartTaskCompleteTimerAction} from 'redux/actions/startTaskCompleteTimer';
-import {StartNotificationTimerAction} from 'redux/actions/startNotificationTimer';
-import {ClearTimersAction} from 'redux/actions/clearTimers';
-import {FlexState} from '@twilio/flex-ui';
+import { StartTaskCompleteTimerAction } from 'redux/actions/startTaskCompleteTimer';
+import { StartNotificationTimerAction } from 'redux/actions/startNotificationTimer';
+import { ClearTimersAction } from 'redux/actions/clearTimers';
+import { FlexState } from '@twilio/flex-ui';
 import * as ActionTypes from 'constants/ActionTypes';
-import {SnoozeNotificationAction} from 'redux/actions/snoozeNotification';
+import { SnoozeNotificationAction } from 'redux/actions/snoozeNotification';
 
 // Register all component states under the namespace
 export interface AppState extends FlexState {
@@ -28,7 +28,10 @@ const initialState: ForceCompletionNotificationState = {
   completeTaskTimeoutId: undefined,
 };
 
-const rootReducer = (state: ForceCompletionNotificationState = initialState, action: Actions) => {
+const rootReducer = (
+  state: ForceCompletionNotificationState = initialState,
+  action: Actions
+) => {
   switch (action.type) {
     case ActionTypes.ACTION_CLEAR_TIMERS: {
       return initialState;

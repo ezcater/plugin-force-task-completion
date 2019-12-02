@@ -4,9 +4,9 @@ import {
   COMPLETION_LIMIT_IN_MINUTES,
   COMPLETION_LIMIT_IN_MILLISECONDS,
 } from 'constants/Durations';
-import {AppState} from 'redux/reducers/rootReducer';
+import { AppState } from 'redux/reducers/rootReducer';
 import selectIsSnoozed from 'redux/selectors/selectIsSnoozed';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 interface Props {
   isSnoozed: boolean;
@@ -31,9 +31,9 @@ class WrapUpNotificationContent extends React.Component<Props, State> {
 
   componentDidMount() {
     this.interval = window.setInterval(() => {
-      const {secondsUntilWrapUp} = this.state;
+      const { secondsUntilWrapUp } = this.state;
 
-      this.setState({secondsUntilWrapUp: secondsUntilWrapUp - 1});
+      this.setState({ secondsUntilWrapUp: secondsUntilWrapUp - 1 });
     }, 1000);
   }
 
@@ -42,9 +42,10 @@ class WrapUpNotificationContent extends React.Component<Props, State> {
   }
 
   render() {
-    const {isSnoozed} = this.props;
-    const {secondsUntilWrapUp} = this.state;
-    const totalWrapUpTimeLimit = NOTIFICATION_LIMIT_IN_MINUTES + COMPLETION_LIMIT_IN_MINUTES;
+    const { isSnoozed } = this.props;
+    const { secondsUntilWrapUp } = this.state;
+    const totalWrapUpTimeLimit =
+      NOTIFICATION_LIMIT_IN_MINUTES + COMPLETION_LIMIT_IN_MINUTES;
 
     const completionMessage = `You've been in wrap up for almost ${totalWrapUpTimeLimit} minutes. This task will auto-complete in ${secondsUntilWrapUp} seconds. If you need additional time before the task completes, click "Snooze" to keep the task open for 5 more minutes.`;
     const snoozeMessage = `This task will auto-complete in ${secondsUntilWrapUp} seconds. If you need additional time before the task completes, click "Snooze" to keep the task open for 5 more minutes.`;

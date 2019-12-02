@@ -1,12 +1,14 @@
 import React from 'react';
-import {NotificationBar} from '@twilio/flex-ui';
-import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
-import {TASK_PENDING_COMPLETION_NOTIFICATION_ID} from 'constants/NotificationId';
+import { NotificationBar } from '@twilio/flex-ui';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
 import startTaskCompleteTimer, {
   StartTaskCompleteTimerAction,
 } from 'redux/actions/startTaskCompleteTimer';
-import snoozeNotification, {SnoozeNotificationAction} from 'redux/actions/snoozeNotification';
+import snoozeNotification, {
+  SnoozeNotificationAction,
+} from 'redux/actions/snoozeNotification';
 import tracker from 'utilities/tracker';
 
 interface Props {
@@ -54,7 +56,4 @@ const mapDispatchToProps = (
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(SnoozeButton);
+export default connect(null, mapDispatchToProps)(SnoozeButton);

@@ -1,5 +1,5 @@
 import selectValidTaskInWrapUp from '../selectValidTaskInWrapUp';
-import {STAGING_GENERAL_SUPPORT} from '../../../constants/ValidTaskQueues';
+import { STAGING_GENERAL_SUPPORT } from '../../../constants/ValidTaskQueues';
 
 describe('selectValidTaskInWrapUp', () => {
   describe('when there is a matching task', () => {

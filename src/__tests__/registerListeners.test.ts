@@ -1,6 +1,9 @@
 import configureStore from 'redux-mock-store';
-import {ACTION_CLEAR_TIMERS} from './../constants/ActionTypes';
-import {reservationWrapUpCallback, reservationCompletionCallback} from './../registerListeners';
+import { ACTION_CLEAR_TIMERS } from './../constants/ActionTypes';
+import {
+  reservationWrapUpCallback,
+  reservationCompletionCallback,
+} from './../registerListeners';
 
 const configuredStore = configureStore();
 const store = configuredStore({
@@ -12,7 +15,7 @@ const store = configuredStore({
 global.Twilio = {
   Flex: {
     Manager: {
-      getInstance: () => ({store}),
+      getInstance: () => ({ store }),
     },
     Notifications: {
       showNotification: jest.fn(),
@@ -52,6 +55,6 @@ describe('registerListeners', () => {
   it('it dispatches the correct event on task completion', () => {
     reservationCompletionCallback(mockedManager);
 
-    expect(dispatch).toHaveBeenCalledWith({type: ACTION_CLEAR_TIMERS});
+    expect(dispatch).toHaveBeenCalledWith({ type: ACTION_CLEAR_TIMERS });
   });
 });

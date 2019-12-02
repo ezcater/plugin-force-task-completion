@@ -1,8 +1,8 @@
-import {Provider} from 'react-redux';
-import {render, fireEvent} from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { render, fireEvent } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import SnoozeButton from '../SnoozeButton';
-import {STAGING_GENERAL_SUPPORT} from '../../constants/ValidTaskQueues';
+import { STAGING_GENERAL_SUPPORT } from '../../constants/ValidTaskQueues';
 import {
   ACTION_START_TASK_COMPLETION_TIMER,
   ACTION_SNOOZE_NOTIFICATION_TIMER,
@@ -41,7 +41,7 @@ const store = configuredStore({
 global.Twilio = {
   Flex: {
     Manager: {
-      getInstance: () => ({store}),
+      getInstance: () => ({ store }),
     },
     Notifications: {
       showNotification: jest.fn(),
@@ -67,14 +67,14 @@ describe('<SnoozeButton />', () => {
 
     expect(store.getActions()).toContainEqual({
       type: ACTION_START_TASK_COMPLETION_TIMER,
-      payload: {completeTaskTimeoutId: 200},
+      payload: { completeTaskTimeoutId: 200 },
     });
   });
 
   it('dispatches the correct action on click', () => {
     global.setTimeout = () => 300 as any;
 
-    const {getByText} = render(
+    const { getByText } = render(
       <Provider store={store}>
         <SnoozeButton />
       </Provider>
@@ -95,7 +95,7 @@ describe('<SnoozeButton />', () => {
   it('calls the tracking utility on click', () => {
     global.setTimeout = () => 300 as any;
 
-    const {getByText} = render(
+    const { getByText } = render(
       <Provider store={store}>
         <SnoozeButton />
       </Provider>
@@ -105,8 +105,11 @@ describe('<SnoozeButton />', () => {
 
     fireEvent.click(actionButton);
 
-    expect(tracker.track).toHaveBeenCalledWith('force task completion activity', {
-      action: 'notification snoozed',
-    });
+    expect(tracker.track).toHaveBeenCalledWith(
+      'force task completion activity',
+      {
+        action: 'notification snoozed',
+      }
+    );
   });
 });

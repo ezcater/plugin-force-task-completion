@@ -18,7 +18,8 @@ const registerNotifications = () => {
     options: {
       browser: {
         title: 'Your task will auto-complete soon.',
-        body: 'Complete your current task or click "Snooze" to give yourself 5 more minutes.',
+        body:
+          'Complete your current task or click "Snooze" to give yourself 5 more minutes.',
       },
     },
   });
@@ -26,7 +27,8 @@ const registerNotifications = () => {
   window.Twilio.Flex.Notifications.registerNotification({
     id: TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID,
     closeButton: true,
-    content: 'Your task has automatically been completed due to high wrap up time.',
+    content:
+      'Your task has automatically been completed due to high wrap up time.',
     timeout: 0,
     type: Flex.NotificationType.success,
   });

@@ -1,8 +1,8 @@
 import configureStore from 'redux-mock-store';
-import {STAGING_GENERAL_SUPPORT} from './../../../constants/ValidTaskQueues';
-import {TASK_PENDING_COMPLETION_NOTIFICATION_ID} from './../../../constants/NotificationId';
-import {COMPLETION_LIMIT_IN_MILLISECONDS} from './../../../constants/Durations';
-import {ACTION_START_NOTIFICATION_TIMER} from './../../../constants/ActionTypes';
+import { STAGING_GENERAL_SUPPORT } from './../../../constants/ValidTaskQueues';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../../constants/NotificationId';
+import { COMPLETION_LIMIT_IN_MILLISECONDS } from './../../../constants/Durations';
+import { ACTION_START_NOTIFICATION_TIMER } from './../../../constants/ActionTypes';
 import startNotificationTimer from '../startNotificationTimer';
 import tracker from './../../../utilities/tracker';
 
@@ -38,7 +38,7 @@ global.clearTimeout = jest.fn();
 global.Twilio = {
   Flex: {
     Manager: {
-      getInstance: () => ({store}),
+      getInstance: () => ({ store }),
     },
     Notifications: {
       showNotification: jest.fn(),
@@ -87,9 +87,9 @@ describe('startNotificationTimer', () => {
 
       jest.runAllTimers();
 
-      expect(window.Twilio.Flex.Notifications.showNotification).toHaveBeenCalledWith(
-        TASK_PENDING_COMPLETION_NOTIFICATION_ID
-      );
+      expect(
+        window.Twilio.Flex.Notifications.showNotification
+      ).toHaveBeenCalledWith(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
     });
 
     it('calls the event tracking utility', () => {
@@ -97,9 +97,12 @@ describe('startNotificationTimer', () => {
 
       jest.runAllTimers();
 
-      expect(tracker.track).toHaveBeenCalledWith('force task completion activity', {
-        action: 'notification shown',
-      });
+      expect(tracker.track).toHaveBeenCalledWith(
+        'force task completion activity',
+        {
+          action: 'notification shown',
+        }
+      );
     });
   });
 });

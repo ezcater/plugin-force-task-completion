@@ -1,7 +1,7 @@
 import selectValidTaskInWrapUp from 'redux/selectors/selectValidTaskInWrapUp';
-import {ACTION_SNOOZE_NOTIFICATION_TIMER} from 'constants/ActionTypes';
-import {SNOOZE_DURATION_IN_MILLISECONDS} from 'constants/Durations';
-import {TASK_PENDING_COMPLETION_NOTIFICATION_ID} from 'constants/NotificationId';
+import { ACTION_SNOOZE_NOTIFICATION_TIMER } from 'constants/ActionTypes';
+import { SNOOZE_DURATION_IN_MILLISECONDS } from 'constants/Durations';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
 import tracker from 'utilities/tracker';
 
 export interface SnoozeNotificationAction {
@@ -23,7 +23,9 @@ const timeoutCallback = () => {
       action: 'notification snoozed due to active call',
     });
   } else {
-    window.Twilio.Flex.Notifications.showNotification(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
+    window.Twilio.Flex.Notifications.showNotification(
+      TASK_PENDING_COMPLETION_NOTIFICATION_ID
+    );
 
     tracker.track('force task completion activity', {
       action: 'notification shown',
@@ -38,7 +40,9 @@ const snoozeNotification = (): SnoozeNotificationAction => {
   window.clearTimeout(state.forceTaskCompletion.completeTaskTimeoutId);
   window.clearTimeout(state.forceTaskCompletion.notificationTimeoutId);
 
-  window.Twilio.Flex.Notifications.dismissNotificationById(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
+  window.Twilio.Flex.Notifications.dismissNotificationById(
+    TASK_PENDING_COMPLETION_NOTIFICATION_ID
+  );
 
   const newNotificationTimeoutId = window.setTimeout(
     timeoutCallback,
