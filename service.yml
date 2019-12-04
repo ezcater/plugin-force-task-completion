@@ -1,0 +1,25 @@
+name: plugin-force-task-completion
+slack: pb-a-liberty
+configuration_opt_in_environments: true
+
+staging:
+  environment:
+    NODE_ENV: staging
+
+production:
+  environment:
+    NODE_ENV: production
+
+tests:
+  primary:
+    - name: web
+      command: tail -f /dev/null
+      environment:
+        NODE_ENV: "test"
+  steps:
+    - run:
+        test: Type Check
+        command: npm run tsc
+    - run:
+        test: Unit Tests
+        command: npm test
