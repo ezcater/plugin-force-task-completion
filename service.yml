@@ -19,7 +19,7 @@ tests:
   steps:
     - run:
         test: Type Check
-        command: npm run tsc
+        command: npm run type-check
     - run:
         test: Unit Tests
         command: npm test

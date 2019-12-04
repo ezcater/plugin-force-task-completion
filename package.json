@@ -17,7 +17,8 @@
     "remove": "flex-plugin remove",
     "prestart": "npm run bootstrap",
     "start": "flex-plugin start",
-    "test": "flex-plugin test --env=jsdom"
+    "test": "flex-plugin test --env=jsdom",
+    "type-check": "tsc"
   },
   "dependencies": {
     "craco-config-flex-plugin": "^3.0.6",
