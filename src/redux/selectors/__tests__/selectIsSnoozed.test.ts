@@ -4,7 +4,7 @@ const state = {
   forceTaskCompletion: {
     isSnoozed: true,
   },
-};
+} as any;
 
 describe('selectIsSnoozed', () => {
   it('returns the correct state', () => {

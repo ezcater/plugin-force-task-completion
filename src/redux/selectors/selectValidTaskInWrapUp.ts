@@ -1,6 +1,6 @@
 import { ITask } from '@twilio/flex-ui';
-import { AppState } from 'redux/reducers/rootReducer';
-import { NOTIFICATION_LIMIT_IN_MILLISECONDS } from 'constants/Durations';
+import { AppState } from '../reducers/rootReducer';
+import { NOTIFICATION_LIMIT_IN_MILLISECONDS } from '../../constants/Durations';
 
 const selectValidTaskInWrapUp = (state: AppState): ITask | undefined => {
   const tasks = Array.from(state.flex.worker.tasks.values());

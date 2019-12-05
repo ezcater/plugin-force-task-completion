@@ -17,8 +17,31 @@
     "remove": "flex-plugin remove",
     "prestart": "npm run bootstrap",
     "start": "flex-plugin start",
-    "test": "flex-plugin test --env=jsdom",
+    "test": "flex-plugin test --env=jsdom --coverage",
     "type-check": "tsc"
+  },
+  "test": "jest",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "src/**/*.tsx"
+    ],
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   },
   "dependencies": {
     "craco-config-flex-plugin": "^3.0.6",
@@ -32,7 +55,7 @@
   "devDependencies": {
     "@testing-library/react": "^9.3.2",
     "@twilio/flex-ui": "^1",
-    "@types/jest": "^24.0.18",
+    "@types/jest": "^24.0.23",
     "@types/node": "^12.7.12",
     "@types/react": "^16.8.16",
     "@types/react-dom": "^16.8.4",
@@ -40,7 +63,8 @@
     "@types/redux-mock-store": "^1.0.1",
     "babel-polyfill": "^6.26.0",
     "prettier": "1.19.1",
-    "redux-mock-store": "^1.5.3"
+    "redux-mock-store": "^1.5.3",
+    "ts-jest": "^24.2.0"
   },
   "browserslist": {
     "production": [

@@ -5,6 +5,12 @@ import {
   reservationCompletionCallback,
 } from './../registerListeners';
 
+declare global {
+  interface Window {
+    Twilio: any;
+  }
+}
+
 const configuredStore = configureStore();
 const store = configuredStore({
   forceTaskCompletion: {
@@ -22,7 +28,7 @@ global.Twilio = {
       dismissNotificationById: jest.fn(),
     },
   },
-} as any;
+};
 
 const dispatch = jest.fn();
 

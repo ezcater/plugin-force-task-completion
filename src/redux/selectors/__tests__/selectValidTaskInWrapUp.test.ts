@@ -28,7 +28,7 @@ describe('selectValidTaskInWrapUp', () => {
           },
         },
       },
-    };
+    } as any;
 
     it('returns the task', () => {
       const validTaskInTaskUp = selectValidTaskInWrapUp(state);
@@ -56,7 +56,7 @@ describe('selectValidTaskInWrapUp', () => {
           },
         },
       },
-    };
+    } as any;
 
     it('returns undefined', () => {
       const validTaskInTaskUp = selectValidTaskInWrapUp(state);

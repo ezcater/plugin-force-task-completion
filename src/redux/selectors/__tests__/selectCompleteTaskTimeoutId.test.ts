@@ -4,7 +4,7 @@ const state = {
   forceTaskCompletion: {
     completeTaskTimeoutId: 100,
   },
-};
+} as any;
 
 describe('selectCompleteTaskTimeoutId', () => {
   it('returns the correct state', () => {
