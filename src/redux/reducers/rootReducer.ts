@@ -36,21 +36,18 @@ const rootReducer = (
     case ActionTypes.ACTION_CLEAR_TIMERS: {
       return initialState;
     }
-
     case ActionTypes.ACTION_START_NOTIFICATION_TIMER: {
       return {
         ...state,
         notificationTimeoutId: action.payload.notificationTimeoutId,
       };
     }
-
     case ActionTypes.ACTION_START_TASK_COMPLETION_TIMER: {
       return {
         ...state,
         completeTaskTimeoutId: action.payload.completeTaskTimeoutId,
       };
     }
-
     case ActionTypes.ACTION_SNOOZE_NOTIFICATION_TIMER: {
       return {
         ...state,
@@ -58,7 +55,6 @@ const rootReducer = (
         notificationTimeoutId: action.payload.notificationTimeoutId,
       };
     }
-
     default:
       return state;
   }

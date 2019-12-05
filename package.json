@@ -33,15 +33,7 @@
       "json",
       "lcov",
       "text"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 100,
-        "statements": 100
-      }
-    }
+    ]
   },
   "dependencies": {
     "craco-config-flex-plugin": "^3.0.6",
