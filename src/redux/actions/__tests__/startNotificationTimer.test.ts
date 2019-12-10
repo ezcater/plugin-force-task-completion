@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../../constants/NotificationId';
 import { COMPLETION_LIMIT_IN_MILLISECONDS } from './../../../constants/Durations';
-import { ACTION_START_NOTIFICATION_TIMER } from './../../../constants/ActionTypes';
+import { ACTION_START_TIMER } from './../../../constants/ActionTypes';
 import startNotificationTimer from '../startNotificationTimer';
 import tracker from './../../../utilities/tracker';
 
@@ -34,7 +34,7 @@ const store = configuredStore({
     },
   },
   forceTaskCompletion: {
-    notificationTimeoutId: 200,
+    timeoutId: 200,
   },
 });
 
@@ -63,14 +63,14 @@ describe('startNotificationTimer', () => {
       const action = startNotificationTimer(COMPLETION_LIMIT_IN_MILLISECONDS);
 
       expect(action).toEqual({
-        type: ACTION_START_NOTIFICATION_TIMER,
+        type: ACTION_START_TIMER,
         payload: {
-          notificationTimeoutId: 100,
+          timeoutId: 100,
         },
       });
     });
 
-    it('clears the notificationTimeoutId', () => {
+    it('clears the timeoutId', () => {
       startNotificationTimer(COMPLETION_LIMIT_IN_MILLISECONDS);
 
       expect(window.clearTimeout).toHaveBeenCalledWith(200);

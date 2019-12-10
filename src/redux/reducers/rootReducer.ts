@@ -12,8 +12,7 @@ export interface AppState extends FlexState {
 
 export interface ForceCompletionNotificationState {
   isSnoozed: boolean;
-  notificationTimeoutId?: number;
-  completeTaskTimeoutId?: number;
+  timeoutId?: number;
 }
 
 type Actions =
@@ -24,8 +23,7 @@ type Actions =
 
 const initialState: ForceCompletionNotificationState = {
   isSnoozed: false,
-  notificationTimeoutId: undefined,
-  completeTaskTimeoutId: undefined,
+  timeoutId: undefined,
 };
 
 const rootReducer = (
@@ -36,23 +34,17 @@ const rootReducer = (
     case ActionTypes.ACTION_CLEAR_TIMERS: {
       return initialState;
     }
-    case ActionTypes.ACTION_START_NOTIFICATION_TIMER: {
+    case ActionTypes.ACTION_START_TIMER: {
       return {
         ...state,
-        notificationTimeoutId: action.payload.notificationTimeoutId,
+        timeoutId: action.payload.timeoutId,
       };
     }
-    case ActionTypes.ACTION_START_TASK_COMPLETION_TIMER: {
-      return {
-        ...state,
-        completeTaskTimeoutId: action.payload.completeTaskTimeoutId,
-      };
-    }
-    case ActionTypes.ACTION_SNOOZE_NOTIFICATION_TIMER: {
+    case ActionTypes.ACTION_SNOOZE_TIMER: {
       return {
         ...state,
         isSnoozed: true,
-        notificationTimeoutId: action.payload.notificationTimeoutId,
+        timeoutId: action.payload.timeoutId,
       };
     }
     default:

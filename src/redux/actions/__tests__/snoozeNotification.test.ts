@@ -1,5 +1,5 @@
 import configureStore from 'redux-mock-store';
-import { ACTION_SNOOZE_NOTIFICATION_TIMER } from './../../../constants/ActionTypes';
+import { ACTION_SNOOZE_TIMER } from './../../../constants/ActionTypes';
 import snoozeNotification from '../snoozeNotification';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../../constants/NotificationId';
 import tracker from './../../../utilities/tracker';
@@ -8,8 +8,7 @@ import * as selectValidTaskInWrapUp from '../../selectors/selectValidTaskInWrapU
 const configuredStore = configureStore();
 const store = configuredStore({
   forceTaskCompletion: {
-    completeTaskTimeoutId: 100,
-    notificationTimeoutId: 200,
+    timeoutId: 100,
   },
 });
 
@@ -39,9 +38,9 @@ describe('snoozeNotification', () => {
       const action = snoozeNotification();
 
       expect(action).toEqual({
-        type: ACTION_SNOOZE_NOTIFICATION_TIMER,
+        type: ACTION_SNOOZE_TIMER,
         payload: {
-          notificationTimeoutId: 200,
+          timeoutId: 200,
         },
       });
     });

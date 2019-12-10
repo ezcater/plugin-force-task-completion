@@ -4,8 +4,8 @@ import configureStore from 'redux-mock-store';
 import SnoozeButton from '../SnoozeButton';
 
 import {
-  ACTION_START_TASK_COMPLETION_TIMER,
-  ACTION_SNOOZE_NOTIFICATION_TIMER,
+  ACTION_START_TIMER,
+  ACTION_SNOOZE_TIMER,
 } from '../../constants/ActionTypes';
 import tracker from '../../utilities/tracker';
 
@@ -39,7 +39,7 @@ const store = configuredStore({
   },
   forceTaskCompletion: {
     isSnoozed: false,
-    completeTaskTimeoutId: 100,
+    timeoutId: 100,
     task: {},
   },
 });
@@ -72,8 +72,8 @@ describe('<SnoozeButton />', () => {
     );
 
     expect(store.getActions()).toContainEqual({
-      type: ACTION_START_TASK_COMPLETION_TIMER,
-      payload: { completeTaskTimeoutId: 200 },
+      type: ACTION_START_TIMER,
+      payload: { timeoutId: 200 },
     });
   });
 
@@ -91,9 +91,9 @@ describe('<SnoozeButton />', () => {
     fireEvent.click(actionButton);
 
     expect(store.getActions()).toContainEqual({
-      type: ACTION_SNOOZE_NOTIFICATION_TIMER,
+      type: ACTION_SNOOZE_TIMER,
       payload: {
-        notificationTimeoutId: 300,
+        timeoutId: 300,
       },
     });
   });

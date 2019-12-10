@@ -1,7 +1,7 @@
 import configureStore from 'redux-mock-store';
 import * as startNotificationTimer from '../../redux/actions/startNotificationTimer';
 import * as selectValidTaskInWrapUp from '../../redux/selectors/selectValidTaskInWrapUp';
-import { ACTION_START_NOTIFICATION_TIMER } from './../../constants/ActionTypes';
+import { ACTION_START_TIMER } from './../../constants/ActionTypes';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../constants/NotificationId';
 import showNotificationIfTaskExists from '../showNotificationIfTaskExists';
 
@@ -46,8 +46,8 @@ describe('showNotificationIfTaskExists', () => {
         jest
           .spyOn(startNotificationTimer, 'default')
           .mockImplementation(() => ({
-            type: ACTION_START_NOTIFICATION_TIMER,
-            payload: { notificationTimeoutId: 201 },
+            type: ACTION_START_TIMER,
+            payload: { timeoutId: 201 },
           }));
         jest
           .spyOn(selectValidTaskInWrapUp, 'default')
@@ -60,8 +60,8 @@ describe('showNotificationIfTaskExists', () => {
 
         expect(store.getActions()).toEqual([
           {
-            type: ACTION_START_NOTIFICATION_TIMER,
-            payload: { notificationTimeoutId: 201 },
+            type: ACTION_START_TIMER,
+            payload: { timeoutId: 201 },
           },
         ]);
       });

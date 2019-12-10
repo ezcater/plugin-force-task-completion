@@ -7,8 +7,7 @@ import tracker from './../../../utilities/tracker';
 const configuredStore = configureStore();
 const store = configuredStore({
   forceTaskCompletion: {
-    completeTaskTimeoutId: 100,
-    notificationTimeoutId: 200,
+    timeoutId: 100,
   },
 });
 
@@ -38,16 +37,10 @@ describe('clearTimers', () => {
     });
   });
 
-  it('clears the completeTaskTimeoutId', () => {
+  it('clears the timeoutId', () => {
     clearTimers();
 
     expect(global.clearTimeout).toHaveBeenCalledWith(100);
-  });
-
-  it('clears the notificationTimeoutId', () => {
-    clearTimers();
-
-    expect(global.clearTimeout).toHaveBeenCalledWith(200);
   });
 
   it('dismisses the correct notification', () => {
