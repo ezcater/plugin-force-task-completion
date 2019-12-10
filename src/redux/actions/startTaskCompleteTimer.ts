@@ -16,11 +16,13 @@ export interface StartTaskCompleteTimerAction {
 const startTaskCompleteTimer = (): StartTaskCompleteTimerAction => {
   const manager = window.Twilio.Flex.Manager.getInstance();
   const state: AppState = manager.store.getState();
-  const validTaskInWrapUp = selectValidTaskInWrapUp(state);
 
   window.clearTimeout(state.forceTaskCompletion.timeoutId);
 
   const timeoutId = window.setTimeout(() => {
+    const state: AppState = manager.store.getState();
+    const validTaskInWrapUp = selectValidTaskInWrapUp(state);
+
     if (!validTaskInWrapUp) {
       return;
     }
