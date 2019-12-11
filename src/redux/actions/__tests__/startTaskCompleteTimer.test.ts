@@ -1,5 +1,5 @@
 import configureStore from 'redux-mock-store';
-import { ACTION_START_TASK_COMPLETION_TIMER } from './../../../constants/ActionTypes';
+import { ACTION_START_TIMER } from './../../../constants/ActionTypes';
 import startTaskCompleteTimer from '../startTaskCompleteTimer';
 import {
   TASK_PENDING_COMPLETION_NOTIFICATION_ID,
@@ -37,7 +37,7 @@ const store = configuredStore({
     },
   },
   forceTaskCompletion: {
-    completeTaskTimeoutId: 100,
+    timeoutId: 100,
   },
 });
 
@@ -71,14 +71,14 @@ describe('startTaskCompleteTimer', () => {
       const action = startTaskCompleteTimer();
 
       expect(action).toEqual({
-        type: ACTION_START_TASK_COMPLETION_TIMER,
+        type: ACTION_START_TIMER,
         payload: {
-          completeTaskTimeoutId: 200,
+          timeoutId: 200,
         },
       });
     });
 
-    it('clears the completeTaskTimeoutId', () => {
+    it('clears the timeoutId', () => {
       startTaskCompleteTimer();
 
       expect(global.clearTimeout).toHaveBeenCalledWith(100);

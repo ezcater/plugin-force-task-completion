@@ -11,8 +11,7 @@ const clearTimers = (): ClearTimersAction => {
   const manager = window.Twilio.Flex.Manager.getInstance();
   const state: AppState = manager.store.getState();
 
-  window.clearTimeout(state.forceTaskCompletion.completeTaskTimeoutId);
-  window.clearTimeout(state.forceTaskCompletion.notificationTimeoutId);
+  window.clearTimeout(state.forceTaskCompletion.timeoutId);
 
   window.Twilio.Flex.Notifications.dismissNotificationById(
     TASK_PENDING_COMPLETION_NOTIFICATION_ID

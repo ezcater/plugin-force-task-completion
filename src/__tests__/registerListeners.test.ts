@@ -14,7 +14,7 @@ declare global {
 const configuredStore = configureStore();
 const store = configuredStore({
   forceTaskCompletion: {
-    notificationTimeoutId: 200,
+    timeoutId: 200,
   },
 });
 
@@ -36,8 +36,7 @@ const mockedManager = {
   store: {
     getState: () => ({
       forceTaskCompletion: {
-        notificationTimeoutId: 100,
-        completeTaskTimeoutId: 200,
+        timeoutId: 100,
       },
     }),
     dispatch,
@@ -51,9 +50,9 @@ describe('registerListeners', () => {
     reservationWrapUpCallback(mockedManager);
 
     expect(dispatch).toHaveBeenCalledWith({
-      type: 'plugin-force-completion/START_NOTIFICATION_TIMER',
+      type: 'plugin-force-completion/START_TIMER',
       payload: {
-        notificationTimeoutId: 100,
+        timeoutId: 100,
       },
     });
   });

@@ -1,26 +1,28 @@
 import { AppState } from 'redux/reducers/rootReducer';
 import { TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID } from 'constants/NotificationId';
-import { ACTION_START_TASK_COMPLETION_TIMER } from 'constants/ActionTypes';
+import { ACTION_START_TIMER } from 'constants/ActionTypes';
 import { COMPLETION_LIMIT_IN_MILLISECONDS } from 'constants/Durations';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
 import tracker from 'utilities/tracker';
 import selectValidTaskInWrapUp from 'redux/selectors/selectValidTaskInWrapUp';
 
 export interface StartTaskCompleteTimerAction {
-  type: typeof ACTION_START_TASK_COMPLETION_TIMER;
+  type: typeof ACTION_START_TIMER;
   payload: {
-    completeTaskTimeoutId: number;
+    timeoutId: number;
   };
 }
 
 const startTaskCompleteTimer = (): StartTaskCompleteTimerAction => {
   const manager = window.Twilio.Flex.Manager.getInstance();
   const state: AppState = manager.store.getState();
-  const validTaskInWrapUp = selectValidTaskInWrapUp(state);
 
-  window.clearTimeout(state.forceTaskCompletion.completeTaskTimeoutId);
+  window.clearTimeout(state.forceTaskCompletion.timeoutId);
 
-  const newCompleteTaskTimeoutId = window.setTimeout(() => {
+  const timeoutId = window.setTimeout(() => {
+    const state: AppState = manager.store.getState();
+    const validTaskInWrapUp = selectValidTaskInWrapUp(state);
+
     if (!validTaskInWrapUp) {
       return;
     }
@@ -40,10 +42,8 @@ const startTaskCompleteTimer = (): StartTaskCompleteTimerAction => {
   }, COMPLETION_LIMIT_IN_MILLISECONDS);
 
   return {
-    type: ACTION_START_TASK_COMPLETION_TIMER,
-    payload: {
-      completeTaskTimeoutId: newCompleteTaskTimeoutId,
-    },
+    type: ACTION_START_TIMER,
+    payload: { timeoutId },
   };
 };
 
