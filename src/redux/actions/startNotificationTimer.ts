@@ -1,9 +1,10 @@
 import { AppState } from 'redux/reducers/rootReducer';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../constants/NotificationId';
-import selectValidTaskInWrapUp from 'redux/selectors/selectValidTaskInWrapUp';
+import selectValidTask from 'redux/selectors/selectValidTask';
 import { ACTION_START_TIMER } from 'constants/ActionTypes';
 import tracker from 'utilities/tracker';
 import snoozeNotification from './snoozeNotification';
+import getIsTaskCompletable from 'utilities/getIsTaskCompletable';
 
 export interface StartNotificationTimerAction {
   type: typeof ACTION_START_TIMER;
@@ -16,13 +17,19 @@ const timeoutCallback = () => {
   const manager = window.Twilio.Flex.Manager.getInstance();
   const state = manager.store.getState();
 
-  const validTaskInWrapUp = selectValidTaskInWrapUp(state);
+  const validTask = selectValidTask(state);
+  const isTaskCompletable = getIsTaskCompletable(validTask);
 
-  if (!validTaskInWrapUp) {
+  if (!validTask) {
+    return;
+  }
+
+  if (!isTaskCompletable) {
     manager.store.dispatch(snoozeNotification());
 
     tracker.track('force task completion activity', {
       action: 'notification snoozed due to active call',
+      id: validTask.taskSid,
     });
   } else {
     window.Twilio.Flex.Notifications.showNotification(
@@ -31,6 +38,7 @@ const timeoutCallback = () => {
 
     tracker.track('force task completion activity', {
       action: 'notification shown',
+      id: validTask.taskSid,
     });
   }
 };

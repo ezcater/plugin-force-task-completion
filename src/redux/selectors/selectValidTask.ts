@@ -2,7 +2,7 @@ import { ITask } from '@twilio/flex-ui';
 import { AppState } from '../reducers/rootReducer';
 import { NOTIFICATION_LIMIT_IN_MILLISECONDS } from '../../constants/Durations';
 
-const selectValidTaskInWrapUp = (state: AppState): ITask | undefined => {
+const selectValidTask = (state: AppState): ITask | undefined => {
   const tasks = Array.from(state.flex.worker.tasks.values());
   const config = state.flex.config as any;
   const { taskChannels, taskQueues } = config.pluginForceTaskCompletion;
@@ -16,22 +16,9 @@ const selectValidTaskInWrapUp = (state: AppState): ITask | undefined => {
     const isWrapUpTimeOverLimit =
       task.taskStatus === 'wrapping' &&
       timeSinceCreation >= NOTIFICATION_LIMIT_IN_MILLISECONDS;
-    const hasConferenceWithActiveParticipants =
-      task.conference &&
-      task.conference.participants &&
-      task.conference.participants.some(participant => {
-        return (
-          participant.isMyself === false && participant.status === 'joined'
-        );
-      });
 
-    return (
-      isValidTaskChannel &&
-      isValidTaskQueue &&
-      isWrapUpTimeOverLimit &&
-      !hasConferenceWithActiveParticipants
-    );
+    return isValidTaskChannel && isValidTaskQueue && isWrapUpTimeOverLimit;
   });
 };
 
-export default selectValidTaskInWrapUp;
+export default selectValidTask;

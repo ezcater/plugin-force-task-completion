@@ -1,77 +1,31 @@
-import selectValidTaskInWrapUp from '../selectValidTaskInWrapUp';
+import selectValidTask from '../selectValidTask';
 
-describe('selectValidTaskInWrapUp', () => {
+describe('selectValidTask', () => {
   describe('when there is a matching task', () => {
-    describe('and there are no active participants on the conference', () => {
-      const task = {
-        taskChannelUniqueName: 'voice',
-        queueSid: 'WQ123',
-        dateUpdated: Date.now().valueOf() - 100000000,
-        taskStatus: 'wrapping',
-        conference: {
-          participants: [
-            {
-              isMyself: false,
-              status: 'recently_left',
-            },
-          ],
+    const task = {
+      taskChannelUniqueName: 'voice',
+      queueSid: 'WQ123',
+      dateUpdated: Date.now().valueOf() - 100000000,
+      taskStatus: 'wrapping',
+    };
+    const state = {
+      flex: {
+        worker: {
+          tasks: new Map([['WT123', task]]),
         },
-      };
-      const state = {
-        flex: {
-          worker: {
-            tasks: new Map([['WT123', task]]),
-          },
-          config: {
-            pluginForceTaskCompletion: {
-              taskQueues: ['WQ123'],
-              taskChannels: ['voice'],
-            },
+        config: {
+          pluginForceTaskCompletion: {
+            taskQueues: ['WQ123'],
+            taskChannels: ['voice'],
           },
         },
-      } as any;
+      },
+    } as any;
 
-      it('returns the task', () => {
-        const validTaskInTaskUp = selectValidTaskInWrapUp(state);
+    it('returns the task', () => {
+      const validTaskInTaskUp = selectValidTask(state);
 
-        expect(validTaskInTaskUp).toEqual(task);
-      });
-    });
-
-    describe('and there are active participants on the conference', () => {
-      const task = {
-        taskChannelUniqueName: 'voice',
-        queueSid: 'WQ123',
-        dateUpdated: Date.now().valueOf() - 100000000,
-        taskStatus: 'wrapping',
-        conference: {
-          participants: [
-            {
-              isMyself: false,
-              status: 'joined',
-            },
-          ],
-        },
-      };
-      const state = {
-        flex: {
-          worker: {
-            tasks: new Map([['WT123', task]]),
-          },
-          config: {
-            pluginForceTaskCompletion: {
-              taskQueues: ['WQ123'],
-              taskChannels: ['voice'],
-            },
-          },
-        },
-      } as any;
-
-      it('returns undefined', () => {
-        const validTaskInTaskUp = selectValidTaskInWrapUp(state);
-
-        expect(validTaskInTaskUp).toEqual(undefined);
-      });
+      expect(validTaskInTaskUp).toEqual(task);
     });
   });
 
@@ -97,7 +51,7 @@ describe('selectValidTaskInWrapUp', () => {
     } as any;
 
     it('returns undefined', () => {
-      const validTaskInTaskUp = selectValidTaskInWrapUp(state);
+      const validTaskInTaskUp = selectValidTask(state);
 
       expect(validTaskInTaskUp).toEqual(undefined);
     });
