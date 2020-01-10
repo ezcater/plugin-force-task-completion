@@ -24,8 +24,14 @@ tests:
         test: Make CodeClimate reporter executable
         command: chmod +x ./cc-test-reporter
     - run:
+        test: Start Code Climate reporter
+        command: ./cc-test-reporter before-build
+    - run:
         test: Type Check
         command: npm run type-check
     - run:
         test: Unit Tests
         command: npm test
+    - run:
+        test: End Code Climate reporter
+        command: ./cc-test-reporter after-build
