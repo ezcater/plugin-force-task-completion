@@ -1,5 +1,7 @@
 # plugin-force-task-completion
 
+<a href="https://codeclimate.com/github/codeclimate/codeclimate/maintainability"><img src="https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability" /></a>
+
 ![](https://media.giphy.com/media/8JW82ndaYfmNoYAekM/giphy.gif)
 
 A Twilio Flex plugin to force completion of a task after a set period of time. By default, the notification will appear 29 minutes into the wrap up phase of a task, then the task will automatically complete if the agent does not choose to "snooze" the notificiation.
