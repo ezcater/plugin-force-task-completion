@@ -18,6 +18,12 @@ tests:
         NODE_ENV: "test"
   steps:
     - run:
+        test: Fetch the CodeClimate test reporter
+        command: wget -O cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+    - run:
+        test: Make CodeClimate reporter executable
+        command: chmod +x ./cc-test-reporter
+    - run:
         test: Type Check
         command: npm run type-check
     - run:
