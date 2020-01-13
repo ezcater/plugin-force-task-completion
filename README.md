@@ -1,7 +1,7 @@
 # plugin-force-task-completion
 
-<a href="https://codeclimate.com/repos/5de974a3490267727d004d3d/maintainability"><img src="https://api.codeclimate.com/v1/badges/17cff5e2dc4cbe247c19/maintainability" /></a>
-<a href="https://codeclimate.com/repos/5de974a3490267727d004d3d/test_coverage"><img src="https://api.codeclimate.com/v1/badges/17cff5e2dc4cbe247c19/test_coverage" /></a>
+<a href="https://codeclimate.com/repos/5e1cc51043e51f01a201f9f4/maintainability"><img src="https://api.codeclimate.com/v1/badges/90c5fb47a24a2e10a6f3/maintainability" /></a>
+<a href="https://codeclimate.com/repos/5e1cc51043e51f01a201f9f4/test_coverage"><img src="https://api.codeclimate.com/v1/badges/90c5fb47a24a2e10a6f3/test_coverage" /></a>
 
 ![](https://media.giphy.com/media/8JW82ndaYfmNoYAekM/giphy.gif)
 
