@@ -9,3 +9,4 @@ exclude_patterns:
 - "src/ForceTaskCompletionPlugin.tsx"
 - "src/setupTests.ts"
 - "src/index.ts"
+- "*.d.ts"
