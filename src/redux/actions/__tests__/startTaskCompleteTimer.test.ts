@@ -5,6 +5,8 @@ import {
   TASK_PENDING_COMPLETION_NOTIFICATION_ID,
   TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID,
 } from './../../../constants/NotificationId';
+import * as selectValidTask from '../../selectors/selectValidTask';
+import * as getIsTaskCompletable from '../../../utilities/getIsTaskCompletable';
 import tracker from './../../../utilities/tracker';
 
 const task = {
@@ -86,51 +88,83 @@ describe('startTaskCompleteTimer', () => {
   });
 
   describe('when the timeout created by the action is called', () => {
-    it('completes the task', () => {
-      startTaskCompleteTimer();
+    describe('when there is not a valid task', () => {
+      beforeEach(() => {
+        jest.spyOn(selectValidTask, 'default').mockReturnValue(undefined);
+      });
 
-      jest.runAllTimers();
+      it('does not throw an error', () => {
+        startTaskCompleteTimer();
 
-      expect(task.complete).toHaveBeenCalled();
+        expect(() => jest.runOnlyPendingTimers()).not.toThrow();
+      });
     });
 
-    it('calls the event tracking utility', async () => {
-      startTaskCompleteTimer();
+    describe('when the task is not completable', () => {
+      beforeEach(() => {
+        jest.spyOn(selectValidTask, 'default').mockReturnValue({} as any);
+        jest.spyOn(getIsTaskCompletable, 'default').mockReturnValue(false);
+      });
 
-      jest.runAllTimers();
+      it('does not throw an error', () => {
+        startTaskCompleteTimer();
 
-      await flushPromises();
-
-      expect(tracker.track).toHaveBeenCalledWith(
-        'force task completion activity',
-        {
-          action: 'task completed',
-        }
-      );
+        expect(() => jest.runOnlyPendingTimers()).not.toThrow();
+      });
     });
 
-    it('dismisses the correct notification', async () => {
-      startTaskCompleteTimer();
+    describe('when the task is completable', () => {
+      beforeEach(() => {
+        jest.spyOn(selectValidTask, 'default').mockReturnValue(task);
+        jest.spyOn(getIsTaskCompletable, 'default').mockReturnValue(true);
+      });
 
-      jest.runAllTimers();
+      it('completes the task', () => {
+        startTaskCompleteTimer();
 
-      await flushPromises();
+        jest.runAllTimers();
 
-      expect(
-        window.Twilio.Flex.Notifications.dismissNotificationById
-      ).toHaveBeenCalledWith(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
-    });
+        expect(task.complete).toHaveBeenCalled();
+      });
 
-    it('shows the correct notification', async () => {
-      startTaskCompleteTimer();
+      it('calls the event tracking utility', async () => {
+        startTaskCompleteTimer();
 
-      jest.runAllTimers();
+        jest.runAllTimers();
 
-      await flushPromises();
+        await flushPromises();
 
-      expect(
-        window.Twilio.Flex.Notifications.showNotification
-      ).toHaveBeenCalledWith(TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID);
+        expect(tracker.track).toHaveBeenCalledWith(
+          'force task completion activity',
+          {
+            action: 'task completed',
+          }
+        );
+      });
+
+      it('dismisses the correct notification', async () => {
+        startTaskCompleteTimer();
+
+        jest.runAllTimers();
+
+        await flushPromises();
+
+        expect(
+          window.Twilio.Flex.Notifications.dismissNotificationById
+        ).toHaveBeenCalledWith(TASK_PENDING_COMPLETION_NOTIFICATION_ID);
+      });
+
+      it('shows the correct notification', async () => {
+        startTaskCompleteTimer();
+
+        jest.runAllTimers();
+
+        await flushPromises();
+
+        expect(
+          window.Twilio.Flex.Notifications.showNotification
+        ).toHaveBeenCalledWith(TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID);
+      });
     });
   });
 });

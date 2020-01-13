@@ -1,19 +1,21 @@
 import startNotificationTimer from '../redux/actions/startNotificationTimer';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../constants/NotificationId';
 import { NOTIFICATION_LIMIT_IN_MILLISECONDS } from './../constants/Durations';
-import selectValidTaskInWrapUp from '../redux/selectors/selectValidTaskInWrapUp';
+import selectValidTask from '../redux/selectors/selectValidTask';
+import getIsTaskCompletable from './getIsTaskCompletable';
 
 const showNotificationIfTaskExists = () => {
   const manager = window.Twilio.Flex.Manager.getInstance();
   const state = manager.store.getState();
-  const validTaskInWrapUp = selectValidTaskInWrapUp(state);
+  const validTask = selectValidTask(state);
+  const isTaskCompletable = getIsTaskCompletable(validTask);
 
-  if (!validTaskInWrapUp) {
+  if (!isTaskCompletable || !validTask) {
     return;
   }
 
   const timeSinceTaskCreation =
-    Date.now().valueOf() - validTaskInWrapUp.dateUpdated.valueOf();
+    Date.now().valueOf() - validTask.dateUpdated.valueOf();
   const isOverTimeLimit =
     timeSinceTaskCreation >= NOTIFICATION_LIMIT_IN_MILLISECONDS;
 

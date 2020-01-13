@@ -3,7 +3,8 @@ import { ACTION_SNOOZE_TIMER } from './../../../constants/ActionTypes';
 import snoozeNotification from '../snoozeNotification';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../../constants/NotificationId';
 import tracker from './../../../utilities/tracker';
-import * as selectValidTaskInWrapUp from '../../selectors/selectValidTaskInWrapUp';
+import * as selectValidTask from '../../selectors/selectValidTask';
+import * as getIsTaskCompletable from '../../../utilities/getIsTaskCompletable';
 
 const configuredStore = configureStore();
 const store = configuredStore({
@@ -63,9 +64,7 @@ describe('snoozeNotification', () => {
   describe('when the timeout created by the action is called', () => {
     describe('and the task is in a valid state', () => {
       beforeEach(() => {
-        jest
-          .spyOn(selectValidTaskInWrapUp, 'default')
-          .mockReturnValue({} as any);
+        jest.spyOn(selectValidTask, 'default').mockReturnValue({} as any);
       });
 
       it('shows the correct notification', () => {
@@ -81,9 +80,8 @@ describe('snoozeNotification', () => {
 
     describe('and the task is not in a valid state', () => {
       beforeEach(() => {
-        jest
-          .spyOn(selectValidTaskInWrapUp, 'default')
-          .mockReturnValue(undefined);
+        jest.spyOn(selectValidTask, 'default').mockReturnValue({});
+        jest.spyOn(getIsTaskCompletable, 'default').mockReturnValue(false);
       });
 
       it('sets a new timeout', () => {

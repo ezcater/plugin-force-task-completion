@@ -4,7 +4,8 @@ import { ACTION_START_TIMER } from 'constants/ActionTypes';
 import { COMPLETION_LIMIT_IN_MILLISECONDS } from 'constants/Durations';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
 import tracker from 'utilities/tracker';
-import selectValidTaskInWrapUp from 'redux/selectors/selectValidTaskInWrapUp';
+import selectValidTask from 'redux/selectors/selectValidTask';
+import getIsTaskCompletable from 'utilities/getIsTaskCompletable';
 
 export interface StartTaskCompleteTimerAction {
   type: typeof ACTION_START_TIMER;
@@ -21,15 +22,17 @@ const startTaskCompleteTimer = (): StartTaskCompleteTimerAction => {
 
   const timeoutId = window.setTimeout(() => {
     const state: AppState = manager.store.getState();
-    const validTaskInWrapUp = selectValidTaskInWrapUp(state);
+    const validTask = selectValidTask(state);
+    const isTaskCompletable = getIsTaskCompletable(validTask);
 
-    if (!validTaskInWrapUp) {
+    if (!isTaskCompletable || !validTask) {
       return;
     }
 
-    validTaskInWrapUp.complete().then(() => {
+    validTask.complete().then(() => {
       tracker.track('force task completion activity', {
         action: 'task completed',
+        id: validTask.taskSid,
       });
 
       window.Twilio.Flex.Notifications.dismissNotificationById(
