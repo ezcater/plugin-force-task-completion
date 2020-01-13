@@ -20,7 +20,7 @@ npm install
 ```
 
 ### Run the plugin:
-
+The plugin will start on port 3000 by default or you can manually set a port.
 ```
 npm start
 PORT=3001 npm start
