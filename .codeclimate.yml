@@ -1,0 +1,10 @@
+version: "2"
+exclude_patterns:
+- "**/node_modules/"
+- "**/__tests__/"
+- "**/constants/"
+- "src/registerNotifications.tsx"
+- "src/registerListeners.ts"
+- "src/ForceTaskCompletionPlugin.tsx"
+- "src/setupTests.ts"
+- "src/index.ts"
