@@ -23,6 +23,7 @@ const timeoutCallback = () => {
 
     tracker.track('force task completion activity', {
       action: 'notification snoozed due to active call',
+      id: validTask?.taskSid || null,
     });
   } else {
     window.Twilio.Flex.Notifications.showNotification(
@@ -31,6 +32,7 @@ const timeoutCallback = () => {
 
     tracker.track('force task completion activity', {
       action: 'notification shown',
+      id: validTask?.taskSid || null,
     });
   }
 };

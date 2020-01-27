@@ -1,7 +1,7 @@
 {
   "name": "plugin-force-task-completion",
   "description": "Automatically complete Flex tasks after a set duration.",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "bootstrap": "flex-plugin check-start",
@@ -47,11 +47,11 @@
   "dependencies": {
     "craco-config-flex-plugin": "^3.0.6",
     "flex-plugin": "^3.0.0",
-    "flex-plugin-scripts": "^3.2.0",
+    "flex-plugin-scripts": "3.3.7",
     "react": "16.5.2",
     "react-dom": "16.5.2",
-    "react-scripts": "3.2.0",
-    "typescript": "^3.6.4"
+    "react-scripts": "3.3.0",
+    "typescript": "3.7.5"
   },
   "devDependencies": {
     "@testing-library/react": "^9.3.2",

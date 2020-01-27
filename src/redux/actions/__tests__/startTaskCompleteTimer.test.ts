@@ -138,6 +138,7 @@ describe('startTaskCompleteTimer', () => {
           'force task completion activity',
           {
             action: 'task completed',
+            id: 'WT123',
           }
         );
       });

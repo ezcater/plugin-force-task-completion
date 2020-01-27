@@ -111,6 +111,7 @@ describe('snoozeNotification', () => {
           'force task completion activity',
           {
             action: 'notification snoozed due to active call',
+            id: 'WT123',
           }
         );
       });

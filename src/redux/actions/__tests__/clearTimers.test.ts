@@ -58,6 +58,7 @@ describe('clearTimers', () => {
       'force task completion activity',
       {
         action: 'forced completion canceled',
+        id: 'WT123',
       }
     );
   });
