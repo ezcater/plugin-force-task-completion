@@ -10,6 +10,7 @@ import * as getIsTaskCompletable from '../../../utilities/getIsTaskCompletable';
 import tracker from './../../../utilities/tracker';
 
 const task = {
+  taskSid: 'WT123',
   taskChannelUniqueName: 'voice',
   queueSid: 'WQ123',
   dateUpdated: Date.now().valueOf() - 100000000,
