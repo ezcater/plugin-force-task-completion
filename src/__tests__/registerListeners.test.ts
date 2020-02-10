@@ -11,10 +11,37 @@ declare global {
   }
 }
 
+const task = {
+  taskSid: 'WT123',
+  taskChannelUniqueName: 'voice',
+  queueSid: 'WQ123',
+  dateUpdated: Date.now().valueOf() - 100000000,
+  taskStatus: 'wrapping',
+  conference: {
+    participants: [
+      {
+        isMyself: false,
+        status: 'recently_left',
+      },
+    ],
+  },
+} as any;
+
 const configuredStore = configureStore();
 const store = configuredStore({
   forceTaskCompletion: {
     timeoutId: 200,
+  },
+  flex: {
+    worker: {
+      tasks: new Map([['WT123', task]]),
+    },
+    config: {
+      pluginForceTaskCompletion: {
+        taskQueues: ['WQ123'],
+        taskChannels: ['voice'],
+      },
+    },
   },
 });
 

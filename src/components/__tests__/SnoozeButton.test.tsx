@@ -10,6 +10,7 @@ import {
 import tracker from '../../utilities/tracker';
 
 const task = {
+  taskSid: 'WT123',
   taskChannelUniqueName: 'voice',
   queueSid: 'WQ123',
   dateUpdated: Date.now().valueOf() - 100000000,
@@ -115,6 +116,7 @@ describe('<SnoozeButton />', () => {
       'force task completion activity',
       {
         action: 'notification snoozed',
+        id: 'WT123',
       }
     );
   });

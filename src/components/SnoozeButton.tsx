@@ -1,5 +1,5 @@
 import React from 'react';
-import { NotificationBar } from '@twilio/flex-ui';
+import { NotificationBar, ITask } from '@twilio/flex-ui';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
@@ -10,10 +10,13 @@ import snoozeNotification, {
   SnoozeNotificationAction,
 } from 'redux/actions/snoozeNotification';
 import tracker from 'utilities/tracker';
+import selectValidTask from 'redux/selectors/selectValidTask';
+import { AppState } from 'redux/reducers/rootReducer';
 
 interface Props {
   dispatchSnoozeNotification: () => void;
   dispatchStartTaskCompleteTimer: () => void;
+  validTask?: ITask;
 }
 
 class SnoozeButton extends React.Component<Props> {
@@ -28,10 +31,13 @@ class SnoozeButton extends React.Component<Props> {
   }
 
   handleClick() {
-    this.props.dispatchSnoozeNotification();
+    const { dispatchSnoozeNotification, validTask } = this.props;
+
+    dispatchSnoozeNotification();
 
     tracker.track('force task completion activity', {
       action: 'notification snoozed',
+      id: validTask?.taskSid || null,
     });
   }
 
@@ -56,4 +62,10 @@ const mapDispatchToProps = (
   };
 };
 
-export default connect(null, mapDispatchToProps)(SnoozeButton);
+const mapStateToProps = (state: AppState) => {
+  return {
+    validTask: selectValidTask(state),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SnoozeButton);

@@ -32,7 +32,7 @@ const startTaskCompleteTimer = (): StartTaskCompleteTimerAction => {
     validTask.complete().then(() => {
       tracker.track('force task completion activity', {
         action: 'task completed',
-        id: validTask.taskSid,
+        id: validTask?.taskSid || null,
       });
 
       window.Twilio.Flex.Notifications.dismissNotificationById(

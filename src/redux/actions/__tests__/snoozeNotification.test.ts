@@ -80,7 +80,21 @@ describe('snoozeNotification', () => {
 
     describe('and the task is not in a valid state', () => {
       beforeEach(() => {
-        jest.spyOn(selectValidTask, 'default').mockReturnValue({});
+        jest.spyOn(selectValidTask, 'default').mockReturnValue({
+          taskSid: 'WT123',
+          taskChannelUniqueName: 'voice',
+          queueSid: 'WQ123',
+          dateUpdated: Date.now().valueOf() - 100000000,
+          taskStatus: 'wrapping',
+          conference: {
+            participants: [
+              {
+                isMyself: false,
+                status: 'joined',
+              },
+            ],
+          },
+        } as any);
         jest.spyOn(getIsTaskCompletable, 'default').mockReturnValue(false);
       });
 
@@ -111,6 +125,7 @@ describe('snoozeNotification', () => {
           'force task completion activity',
           {
             action: 'notification snoozed due to active call',
+            id: 'WT123',
           }
         );
       });
