@@ -1,5 +1,5 @@
 import { Manager } from '@twilio/flex-ui';
-import rootReducer from 'redux/reducers/rootReducer';
+import rootReducer from './redux/reducers/rootReducer';
 
 // Register your redux store under a unique namespace
 export const namespace = 'forceTaskCompletion';

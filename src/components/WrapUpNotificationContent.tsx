@@ -3,9 +3,9 @@ import {
   NOTIFICATION_LIMIT_IN_MINUTES,
   COMPLETION_LIMIT_IN_MINUTES,
   COMPLETION_LIMIT_IN_MILLISECONDS,
-} from 'constants/Durations';
-import { AppState } from 'redux/reducers/rootReducer';
-import selectIsSnoozed from 'redux/selectors/selectIsSnoozed';
+} from '../constants/Durations';
+import { AppState } from '../redux/reducers/rootReducer';
+import selectIsSnoozed from '../redux/selectors/selectIsSnoozed';
 import { connect } from 'react-redux';
 
 interface Props {

@@ -1,9 +1,9 @@
-import selectValidTask from 'redux/selectors/selectValidTask';
-import { ACTION_SNOOZE_TIMER } from 'constants/ActionTypes';
-import { SNOOZE_DURATION_IN_MILLISECONDS } from 'constants/Durations';
-import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
-import tracker from 'utilities/tracker';
-import getIsTaskCompletable from 'utilities/getIsTaskCompletable';
+import selectValidTask from '../../redux/selectors/selectValidTask';
+import { ACTION_SNOOZE_TIMER } from '../../constants/ActionTypes';
+import { SNOOZE_DURATION_IN_MILLISECONDS } from '../../constants/Durations';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from '../../constants/NotificationId';
+import tracker from '../../utilities/tracker';
+import getIsTaskCompletable from '../../utilities/getIsTaskCompletable';
 
 export interface SnoozeNotificationAction {
   type: typeof ACTION_SNOOZE_TIMER;

@@ -1,7 +1,7 @@
 import { Manager } from '@twilio/flex-ui';
-import { NOTIFICATION_LIMIT_IN_MILLISECONDS } from 'constants/Durations';
-import startNotificationTimer from 'redux/actions/startNotificationTimer';
-import clearTimers from 'redux/actions/clearTimers';
+import { NOTIFICATION_LIMIT_IN_MILLISECONDS } from './constants/Durations';
+import startNotificationTimer from './redux/actions/startNotificationTimer';
+import clearTimers from './redux/actions/clearTimers';
 
 export const reservationWrapUpCallback = (manager: Manager) => {
   manager.store.dispatch(

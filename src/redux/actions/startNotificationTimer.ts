@@ -1,10 +1,10 @@
-import { AppState } from 'redux/reducers/rootReducer';
+import { AppState } from '../../redux/reducers/rootReducer';
 import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from './../../constants/NotificationId';
-import selectValidTask from 'redux/selectors/selectValidTask';
-import { ACTION_START_TIMER } from 'constants/ActionTypes';
-import tracker from 'utilities/tracker';
+import selectValidTask from '../../redux/selectors/selectValidTask';
+import { ACTION_START_TIMER } from '../../constants/ActionTypes';
+import tracker from '../../utilities/tracker';
 import snoozeNotification from './snoozeNotification';
-import getIsTaskCompletable from 'utilities/getIsTaskCompletable';
+import getIsTaskCompletable from '../../utilities/getIsTaskCompletable';
 
 export interface StartNotificationTimerAction {
   type: typeof ACTION_START_TIMER;

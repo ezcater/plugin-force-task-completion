@@ -1,11 +1,11 @@
 import React from 'react';
 import * as Flex from '@twilio/flex-ui';
-import SnoozeButton from 'components/SnoozeButton';
-import WrapUpNotificationContent from 'components/WrapUpNotificationContent';
+import SnoozeButton from './components/SnoozeButton';
+import WrapUpNotificationContent from './components/WrapUpNotificationContent';
 import {
   TASK_PENDING_COMPLETION_NOTIFICATION_ID,
   TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID,
-} from 'constants/NotificationId';
+} from './constants/NotificationId';
 
 const registerNotifications = () => {
   window.Twilio.Flex.Notifications.registerNotification({

@@ -1,9 +1,9 @@
-import { StartTaskCompleteTimerAction } from 'redux/actions/startTaskCompleteTimer';
-import { StartNotificationTimerAction } from 'redux/actions/startNotificationTimer';
-import { ClearTimersAction } from 'redux/actions/clearTimers';
+import { StartTaskCompleteTimerAction } from '../../redux/actions/startTaskCompleteTimer';
+import { StartNotificationTimerAction } from '../../redux/actions/startNotificationTimer';
+import { ClearTimersAction } from '../../redux/actions/clearTimers';
 import { FlexState } from '@twilio/flex-ui';
-import * as ActionTypes from 'constants/ActionTypes';
-import { SnoozeNotificationAction } from 'redux/actions/snoozeNotification';
+import * as ActionTypes from '../../constants/ActionTypes';
+import { SnoozeNotificationAction } from '../../redux/actions/snoozeNotification';
 
 // Register all component states under the namespace
 export interface AppState extends FlexState {

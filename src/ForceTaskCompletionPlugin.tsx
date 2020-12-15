@@ -1,9 +1,9 @@
 import * as Flex from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
-import registerReducers from 'registerReducers';
-import registerListeners from 'registerListeners';
-import registerNotifications from 'registerNotifications';
-import showNotificationIfTaskExists from 'utilities/showNotificationIfTaskExists';
+import registerReducers from './registerReducers';
+import registerListeners from './registerListeners';
+import registerNotifications from './registerNotifications';
+import showNotificationIfTaskExists from './utilities/showNotificationIfTaskExists';
 
 declare global {
   interface Window {

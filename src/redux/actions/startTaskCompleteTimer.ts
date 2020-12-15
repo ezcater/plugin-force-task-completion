@@ -1,11 +1,11 @@
-import { AppState } from 'redux/reducers/rootReducer';
-import { TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID } from 'constants/NotificationId';
-import { ACTION_START_TIMER } from 'constants/ActionTypes';
-import { COMPLETION_LIMIT_IN_MILLISECONDS } from 'constants/Durations';
-import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
-import tracker from 'utilities/tracker';
-import selectValidTask from 'redux/selectors/selectValidTask';
-import getIsTaskCompletable from 'utilities/getIsTaskCompletable';
+import { AppState } from '../../redux/reducers/rootReducer';
+import { TASK_SUCCESSFULLY_COMPLETED_NOTIFICATION_ID } from '../../constants/NotificationId';
+import { ACTION_START_TIMER } from '../../constants/ActionTypes';
+import { COMPLETION_LIMIT_IN_MILLISECONDS } from '../../constants/Durations';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from '../../constants/NotificationId';
+import tracker from '../../utilities/tracker';
+import selectValidTask from '../../redux/selectors/selectValidTask';
+import getIsTaskCompletable from '../../utilities/getIsTaskCompletable';
 
 export interface StartTaskCompleteTimerAction {
   type: typeof ACTION_START_TIMER;

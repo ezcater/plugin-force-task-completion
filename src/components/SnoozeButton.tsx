@@ -1,26 +1,15 @@
 import React from 'react';
-import { NotificationBar, ITask } from '@twilio/flex-ui';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
-import startTaskCompleteTimer, {
-  StartTaskCompleteTimerAction,
-} from 'redux/actions/startTaskCompleteTimer';
-import snoozeNotification, {
-  SnoozeNotificationAction,
-} from 'redux/actions/snoozeNotification';
-import tracker from 'utilities/tracker';
-import selectValidTask from 'redux/selectors/selectValidTask';
-import { AppState } from 'redux/reducers/rootReducer';
+import { NotificationBar } from '@twilio/flex-ui';
+import { connect, ConnectedProps } from 'react-redux';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from '../constants/NotificationId';
+import startTaskCompleteTimer from '../redux/actions/startTaskCompleteTimer';
+import snoozeNotification from '../redux/actions/snoozeNotification';
+import tracker from '../utilities/tracker';
+import selectValidTask from '../redux/selectors/selectValidTask';
+import { AppState } from '../redux/reducers/rootReducer';
 
-interface Props {
-  dispatchSnoozeNotification: () => void;
-  dispatchStartTaskCompleteTimer: () => void;
-  validTask?: ITask;
-}
-
-class SnoozeButton extends React.Component<Props> {
-  constructor(props: Props) {
+class SnoozeButton extends React.Component<ConnectedProps<typeof connector>> {
+  constructor(props: ConnectedProps<typeof connector>) {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
@@ -53,13 +42,9 @@ class SnoozeButton extends React.Component<Props> {
   }
 }
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<SnoozeNotificationAction | StartTaskCompleteTimerAction>
-) => {
-  return {
-    dispatchSnoozeNotification: () => dispatch(snoozeNotification()),
-    dispatchStartTaskCompleteTimer: () => dispatch(startTaskCompleteTimer()),
-  };
+const mapDispatchToProps = {
+  dispatchSnoozeNotification: snoozeNotification,
+  dispatchStartTaskCompleteTimer: startTaskCompleteTimer,
 };
 
 const mapStateToProps = (state: AppState) => {
@@ -68,4 +53,6 @@ const mapStateToProps = (state: AppState) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SnoozeButton);
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+export default connector(SnoozeButton);

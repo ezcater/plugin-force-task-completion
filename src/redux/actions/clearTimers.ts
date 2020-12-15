@@ -1,8 +1,8 @@
-import { AppState } from 'redux/reducers/rootReducer';
-import { ACTION_CLEAR_TIMERS } from 'constants/ActionTypes';
-import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from 'constants/NotificationId';
-import tracker from 'utilities/tracker';
-import selectValidTask from 'redux/selectors/selectValidTask';
+import { AppState } from '../../redux/reducers/rootReducer';
+import { ACTION_CLEAR_TIMERS } from '../../constants/ActionTypes';
+import { TASK_PENDING_COMPLETION_NOTIFICATION_ID } from '../../constants/NotificationId';
+import tracker from '../../utilities/tracker';
+import selectValidTask from '../../redux/selectors/selectValidTask';
 
 export interface ClearTimersAction {
   type: typeof ACTION_CLEAR_TIMERS;
