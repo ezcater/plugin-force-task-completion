@@ -1,19 +1,19 @@
 {
   "name": "plugin-force-task-completion",
   "description": "Automatically complete Flex tasks after a set duration.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "postinstall": "flex-plugin pre-script-check",
+    "postinstall": "UNBUNDLED_REACT=true flex-plugin pre-script-check",
     "start": "PORT=52230 twilio flex:plugins:start",
-    "build": "twilio flex:plugins:build",
+    "build": "UNBUNDLED_REACT=true twilio flex:plugins:build",
     "test": "TZ=UTC twilio flex:plugins:test",
     "type-check": "tsc"
   },
   "dependencies": {
     "flex-plugin-scripts": "4.3.14-beta.0",
-    "react": "16.5.2",
-    "react-dom": "16.5.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-scripts": "^3.4.3",
     "redux": "^3.7.2",
     "typescript": "3.8.3"
@@ -22,7 +22,6 @@
     "@testing-library/react": "^9.3.2",
     "@twilio/flex-ui": "^1",
     "@types/jest": "^26.0.19",
-    "@types/lodash": "^4.14.165",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.12",
