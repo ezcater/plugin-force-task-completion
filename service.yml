@@ -1,4 +1,5 @@
 name: plugin-force-task-completion
+owner: liberty
 slack: pb-a-liberty
 configuration_opt_in_environments: true
 
