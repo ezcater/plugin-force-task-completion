@@ -1,0 +1,23 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "06:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: "@twilio/flex-ui"
+    versions:
+    - 1.24.2
+    - 1.24.3
+    - 1.25.0
+    - 1.25.1
+    - 1.25.2
+    - 1.25.3
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+  - dependency-name: elliptic
+    versions:
+    - 6.5.3
